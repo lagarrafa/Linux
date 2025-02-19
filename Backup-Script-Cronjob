@@ -1,0 +1,48 @@
+A user is requesting you to download some files every Sunday night, 
+put them in the BACKUP folder and make sure everyone has access to them, 
+how would you do that on a LINUX system?
+
+SCRIPT: 
+
+#################################
+
+#!/bin/bash
+# Path to the source file
+source_file="/home/SOURCE/file.txt"
+
+# Path to the destination directory
+destination_directory="/home/BACKUP/"
+
+# Name for the backup file (add the date and time to avoid overwriting)
+timestamp=$(date +"%Y%m%d%H%M")
+backup_file="file_backup_$timestamp.txt"
+
+# Copy the file
+cp "$source_file" "$destination_directory$backup_file"
+
+# Check if the copy was successful
+if [ $? -eq 0 ]; then
+    echo "Backup completed successfully: $backup_file"
+else
+    echo "Error in backup process."
+fi
+
+#################################
+
+ACTIONS: 
+
+#Change permission to executable
+chmod +x /home/lgarrafa/script.sh 
+
+#Change permission to Folder so everyone can access it
+chmod -R 777 /home/BACKUP/
+
+#Edit the crontab
+crontab -e
+
+#Add the cronjob
+59 23 * * 0 /home/lgarrafa/script.sh 
+
+#Check the cronjob
+crontab -l
+
