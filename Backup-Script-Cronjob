@@ -41,7 +41,7 @@ chmod -R 777 /home/BACKUP/
 crontab -e
 
 #Add the cronjob
-59 23 * * 0 /home/lgarrafa/script.sh 
+59 23 * * 0 /home/script.sh 
 
 #Check the cronjob
 crontab -l
